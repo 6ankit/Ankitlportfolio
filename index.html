@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ankit Lekharajani | Frontend Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4A00E0;
+            --secondary: #00F5FF;
+            --dark: #0F0F1A;
+            --light: #F5F5FF;
+            --gray: #888;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+      /* Navigation */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 1.5rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background-color: rgba(15, 15, 26, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: var(--light);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--secondary);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--secondary);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    z-index: 101;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--light);
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background-color: rgba(15, 15, 26, 0.95);
+        backdrop-filter: blur(15px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+        transition: right 0.5s ease;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 6px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -6px);
+    }
+}
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 10;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--light), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+        }
+
+        .hero p {
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--dark);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(74, 0, 224, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+
+        /* Particles Background */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        /* About Section */
+        .section {
+            padding: 5rem 10%;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .about-content {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .skill {
+            background-color: rgba(74, 0, 224, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            border: 1px solid var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .about-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary);
+            box-shadow: 0 0 30px rgba(74, 0, 224, 0.5);
+        }
+
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--secondary);
+            border-radius: 50%;
+            top: 30px;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .left::after {
+            right: -10px;
+        }
+
+        .right::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-date {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+      /* Projects Section */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    padding: 0 1rem; /* Equal padding on both sides */
+}
+
+.project-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0 auto; /* Centers the card if it doesn't fill the grid */
+    width: 100%; /* Ensures full width within grid cell */
+    max-width: 100%; /* Prevents overflow */
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.project-image {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.project-content {
+    padding: 1.5rem;
+}
+
+.project-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.project-description {
+    margin-bottom: 1rem;
+    color: var(--gray);
+    line-height: 1.6;
+}
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.tech {
+    background-color: rgba(0, 245, 255, 0.1);
+    color: var(--secondary);
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+}
+
+.project-links {
+    display: flex;
+    gap: 1rem;
+}
+
+        /* Contact Section */
+        .contact-container {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .contact-form {
+            flex: 1;
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            color: var(--light);
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: rgba(0, 0, 0, 0.2);
+            margin-top: 3rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1.3rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item::after {
+                left: 21px;
+            }
+
+            .left::after, .right::after {
+                left: 21px;
+            }
+
+            .right {
+                left: 0;
+            }
+
+            .contact-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">AL</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Ankit Lekharajani</h1>
+            <h2>Frontend Developer & DSA Enthusiast</h2>
+            <p>I build exceptional digital experiences with modern web technologies. Passionate about solving complex problems and creating intuitive user interfaces.</p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Contact Me</a>
+            </div>
+        </div>
+        <div id="particles-js"></div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Who am I?</h3>
+                <p>I'm a passionate Frontend Developer with expertise in JavaScript, React, and modern web technologies. I specialize in building responsive, user-friendly interfaces with clean, efficient code.</p>
+                <p>With a strong foundation in Data Structures and Algorithms (500+ problems solved), I approach development challenges with problem-solving skills and attention to detail.</p>
+                <p>My goal is to create digital experiences that are not only visually appealing but also performant and accessible to all users.</p>
+                <div class="skills">
+                    <span class="skill">HTML5</span>
+                    <span class="skill">CSS3</span>
+                    <span class="skill">JavaScript</span>
+                    <span class="skill">Node.js</span>
+                    <span class="skill">Express</span>
+                    <span class="skill">SQL</span>
+                    <span class="skill">C/C++</span>
+                    <span class="skill">Python</span>
+                    <span class="skill">DSA</span>
+                    <div class="skill">Next Js</div>
+                    <div class="skill">Type Script</div>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="Screenshot 2024-09-12 232917.png" alt="Ankit Lekharajani" class="profile-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section" id="experience">
+        <h2 class="section-title">Experience & Education</h2>
+        <div class="timeline">
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <div class="timeline-date">06/2025 - Present</div>
+                    <h3 class="timeline-title">Frontend Developer</h3>
+                    <h4>Quantumsoft Technologies Private Limited</h4>
+                    <p>Working as a Software Intern gaining hands-on experience in software development. Responsibilities include assisting in coding, debugging, and testing software applications, and collaborating with senior developers.</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <div class="timeline-date">Bachelor of Engineering</div>
+                    <h3 class="timeline-title">Prof Ram Meghe College of Engineering & Management</h3>
+                    <p>CGPA: 8.56</p>
+                </div>
+            </div>
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <div class="timeline-date">Diploma in Computer Science</div>
+                    <h3 class="timeline-title">Somayya Polytechnic chandrayur</h3>
+                    <p>Percentage: 82%</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <div class="timeline-date">High School</div>
+                    <h3 class="timeline-title">Infant Jesus English Public High School</h3>
+                    <p>CBSE: 68%</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- Projects Section -->
+<section class="section" id="projects">
+    <h2 class="section-title">My Projects</h2>
+    <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="project-card">
+            <img src="https://i.pinimg.com/originals/36/d3/a4/36d3a43f8e03d49777c76a4eb8f20b14.jpg" alt="Lunch Fusion" class="project-image">
+            <div class="project-content">
+                <h3 class="project-title">Lunch Fusion</h3>
+                <p class="project-description">A real-time chat application with integrated calorie tracking system. Features include live messaging, meal logging, and nutritional analysis through API integration.</p>
+                <div class="project-tech">
+                    <span class="tech">EJS</span>
+                    <span class="tech">CSS</span>
+                    <span class="tech">JavaScript</span>
+                    <span class="tech">Node.js</span>
+                    <span class="tech">Express</span>
+                    <span class="tech">MongoDB</span>
+                    <span class="tech">Socket.io</span>
+                    <span class="tech">API Integration</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" class="btn btn-primary">Live Demo</a>
+                    <a href="#" class="btn btn-secondary">Code</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Project 2 -->
+        <div class="project-card">
+            <img src="https://th.bing.com/th?q=E-Commerce+Website+PNG&w=120&h=120&c=1&rs=1&qlt=90&cb=1&dpr=1.3&pid=InlineBlock&mkt=en-IN&cc=IN&setlang=en&adlt=moderate&t=1&mw=247" alt="CampusExchange" class="project-image">
+            <div class="project-content">
+                <h3 class="project-title">CampusExchange</h3>
+                <p class="project-description">A web application that allows students to buy and sell used items like textbooks, electronics and other used items within the college community.</p>
+                <div class="project-tech">
+                    <span class="tech">EJS</span>
+                    <span class="tech">CSS</span>
+                    <span class="tech">JavaScript</span>
+                    <span class="tech">Node.js</span>
+                    <span class="tech">Express</span>
+                    <span class="tech">SQL</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" class="btn btn-primary">Live Demo</a>
+                    <a href="#" class="btn btn-secondary">Code</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Project 3 -->
+        <div class="project-card">
+            <img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1687815218322/1c608806-fc26-4d10-b3bf-5efd2dff2473.png?w=1600&h=840&fit=crop&crop=entropy&auto=compress,format&format=webp" alt="DSA Learning Platform" class="project-image">
+            <div class="project-content">
+                <h3 class="project-title">DSA Learning Platform</h3>
+                <p class="project-description">A website dedicated to learning Data Structures and Algorithms with interactive examples and practice problems.</p>
+                <div class="project-tech">
+                    <span class="tech">HTML</span>
+                    <span class="tech">CSS</span>
+                    <span class="tech">JavaScript</span>
+                    <span class="tech">Node.js</span>
+                    <span class="tech">Express</span>
+                    <span class="tech">SQL</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" class="btn btn-primary">Live Demo</a>
+                    <a href="#" class="btn btn-secondary">Code</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div>
+                        <h3>Email</h3>
+                        <p>ankitlekharajani752@gmail.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div>
+                        <h3>Phone</h3>
+                        <p>+91 8308768339</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div>
+                        <h3>Location</h3>
+                        <p>Amravati, Maharashtra, India</p>
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/ankit-lekharajani-655a50294/" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com/6ankit" class="social-link"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/ankitlekhrajani02/" class="social-link"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2025 Ankit Lekharajani. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Particles.js initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#00F5FF"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": false,
+                        "anim": {
+                            "enable": false,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": false,
+                            "speed": 40,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#4A00E0",
+                        "opacity": 0.4,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "direction": "none",
+                        "random": false,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": false,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Form submission
+            const form = document.querySelector('.contact-form');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your message! I will get back to you soon.');
+                form.reset();
+            });
+
+            // Animate timeline items on scroll
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            function checkScroll() {
+                timelineItems.forEach(item => {
+                    const itemTop = item.getBoundingClientRect().top;
+                    if (itemTop < window.innerHeight - 100) {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateX(0)';
+                    }
+                });
+            }
+
+            // Initialize timeline items
+            timelineItems.forEach((item, index) => {
+                item.style.opacity = '0';
+                if (index % 2 === 0) {
+                    item.style.transform = 'translateX(-50px)';
+                } else {
+                    item.style.transform = 'translateX(50px)';
+                }
+                item.style.transition = 'all 0.5s ease';
+            });
+
+            window.addEventListener('scroll', checkScroll);
+            checkScroll(); // Run once on load
+        });
+    </script>
+</body>
+</html>
